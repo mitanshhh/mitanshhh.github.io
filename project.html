@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mitansh Jadhav Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: #0c0f1f;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    nav {
+      display: flex;
+      /* justify-content: center;
+      align-items: center; */
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(10px);
+      flex-wrap: wrap;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #f9b233;
+      text-shadow: 0 0 10px #f9b233;
+    }
+
+    .projects-section {
+      padding: 4rem 2rem;
+      background: #0c0f1f;
+      text-align: center;
+    }
+
+    .projects-section h2 {
+      font-size: 2.5rem;
+      color: #f9b233;
+      margin-bottom: 0.5rem;
+    }
+
+    .projects-section p {
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+
+    .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .project-card {
+      background-color: #1a1e3a;
+      border: 1px solid #0FA4AF;
+      border-radius: 10px;
+      width: 300px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #0FA4AF;
+    }
+
+    .project-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .project-content {
+      padding: 1rem;
+      text-align: left;
+    }
+
+    .project-tags {
+      margin: 0.5rem 0 1rem;
+    }
+
+    .project-tags span {
+      background: #2c2f45;
+      padding: 4px 8px;
+      margin-right: 5px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+    }
+
+    .project-buttons {
+      display: flex;
+      justify-content: center;
+      padding: 0 1rem 1rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .project-buttons button {
+      background: linear-gradient(45deg, #f9b233, #f97316);
+      border: none;
+      border-radius: 6px;
+      padding: 0.5rem 1rem;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .project-buttons a {
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .projects-section h2 {
+        font-size: 2rem;
+      }
+
+      .project-card {
+        width: 100%;
+        max-width: 90%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <!-- <div style="color: #f9b233; font-weight: bold; font-size: 1.2rem;">Mitansh</div> -->
+     <ul>
+      <li><a href="index.html">About</a></li>
+      <li><a href="project.html" style="color: #f9b233;">Projects</a></li>
+      <li><a href="certifications.html">Certifications</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section class="projects-section">
+    <h2>My Projects</h2>
+    <p>Showcasing my journey in Python development, AI, and Machine Learning</p>
+
+    <div class="projects-container">
+      <!-- <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1581090700227-1e8e48cfdd03" alt="Project Image">
+        <div class="project-content">
+          <h3>My First Project</h3>
+          <p>Add your amazing Python/AI/ML projects here. Include project description, technologies used, and key features.</p>
+          <div class="project-tags">
+            <span>Python</span>
+            <span>AI</span>
+            <span>Machine Learning</span>
+          </div>
+        </div>
+        <div class="project-buttons">
+          <a href="https://example.com" target="_blank"><button>🔗 Link</button></a>
+        </div>
+      </div> -->
+    </div>
+  </section>
+</body>
+</html>

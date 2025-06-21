@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Certifications</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #0f1624;
+            color: #ffffff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f9b233;
+            text-shadow: 0 0 10px #f9b233;
+        }
+
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #f9b233;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: #cccccc;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .certifications {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .card {
+            background-color: #151d2f;
+            border: 1px solid #0FA4AF;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            flex: 1 1 300px;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            /* ensure the card has a defined height, e.g. via parent or explicit height */
+        }
+
+        .card a {
+            margin-top: auto;
+        }
+
+
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px #0FA4AF;
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            color: #ffffff;
+        }
+
+        .card small {
+            display: block;
+            color: #bbbbbb;
+        }
+
+        .card p {
+            color: #cccccc;
+            font-size: 0.95rem;
+        }
+
+        .skills {
+            margin-bottom: 0.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #f9b233;
+            color: #000;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.3rem;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .view-credential {
+            background-color: #f9b233;
+            border: none;
+            color: #000;
+            padding: 0.4rem 1rem;
+            border-radius: 1.25rem;
+            text-decoration: none;
+            display: flex;
+            font-size: 0.85rem;
+            font-weight: bold;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-evenly;
+            margin-top: 3rem;
+            color: #f9b233;
+        }
+
+        .stats div {
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .certifications {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">About</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="certifications.html" style="color: #f9b233;">Certifications</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Certifications</h1>
+        <p class="subtitle">Documenting my continuous learning journey in Python, AI, and Machine Learning</p>
+
+        <div class="certifications">
+            <div class="card">
+                <h2>Introduction to Python</h2>
+                <small>Course Provider - Infosys</small>
+                <p>This course describes the basic concepts of Python like Control structures, Functions, Collections,
+                    Libraries and built-in functions, Modules and Packages, File and Exception handling in Python</p>
+                <div class="skills">
+                    <span class="tag">Python - Opensystem</span>
+
+                </div class="cert1_view">
+                <a href="https://drive.google.com/file/d/1WWGmTi0i52d3AzeOfD8WoeKDpehxIKb8/view?usp=drive_link"
+                    class="view-credential" target="_blank">View Certificate</a>
+            </div>
+
+            <div class="card">
+                <h2>Python Fundamentals</h2>
+                <small>Course Provider - Infosys</small>
+                <p>Python Fundamentals is a beginner-friendly introduction to the Python programming language. It
+                    covers essential concepts such as syntax, data types, control flow, functions, and file handling.
+                    The course also delves into object-oriented programming
+                    (OOP) principles, including classes, objects, inheritance, and encapsulation.</p>
+                <div class="skills">
+                    <span class="tag">Python Programming</span>
+                    <span class="tag">Object Oriented programming</span>
+                    <span class="tag">Syntax handling</span>
+                </div>
+                <a href="https://drive.google.com/file/d/1dsZ8xM-qsklSzGKR6qPxsw8ZpJ2FghpX/view?usp=drive_link"
+                    class="view-credential" target="_blank">View Certificate</a>
+            </div>
+
+            <!-- Add more certification cards here as needed -->
+        </div>
+
+        <div class="stats">
+            <div>
+                <h2>2</h2>
+                <p>Certifications Earned</p>
+            </div>
+            <div>
+                <h2>4</h2>
+                <p>Skills Acquired</p>
+            </div>
+            <div>
+                <h2>&infin;</h2>
+                <p>Learning</p>
+            </div>

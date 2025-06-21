@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mitansh Jadhav Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: #0c0f1f;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      backdrop-filter: blur(10px);
+      flex-wrap: wrap;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s, text-shadow 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #f9b233;
+      text-shadow: 0 0 10px #f9b233;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3rem 2rem;
+      animation: fadeIn 1.2s ease-in;
+    }
+
+    .left {
+      flex: 1;
+      min-width: 300px;
+      max-width: 600px;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      min-width: 300px;
+    }
+
+    .right img {
+    width: 450px;
+    max-width: 100%;
+    border-radius: 200px;
+    box-shadow: 0 0 20px rgba(15, 164, 175, 0.5);
+}
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .name {
+      font-size: 2.8rem;
+      color: #f9b233;
+      font-weight: 700;
+    }
+
+    .role {
+      font-size: 1.5rem;
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+
+    .desc {
+      color: #aaa;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .tag {
+      background-color: #1a1e3a;
+      padding: 0.6rem 1rem;
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      gap: 0.5rem;
+      border: 1px solid #0FA4AF;
+    }
+
+    .tag img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .btn.orange {
+      background-color: #f9b233;
+      color: black;
+    }
+
+    .btn.white {
+      background-color: white;
+      color: #0c0f1f;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 3rem 2rem;
+    }
+
+    .card {
+      background-color: #1a1e3a;
+      border: 1px solid #0FA4AF;
+      border-radius: 10px;
+      padding: 2rem;
+      flex: 1;
+      min-width: 250px;
+      max-width: 300px;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px #0FA4AF;
+    }
+
+    .card h3 {
+      color: white;
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      color: #aaa;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <!-- <div style="color: #f9b233; font-weight: bold; font-size: 1.2rem;">Mitansh</div> -->
+    <ul>
+      <li><a href="index.html" style="color: #f9b233;">About</a></li>
+      <li><a href="project.html">Projects</a></li>
+      <li><a href="certifications.html">Certifications</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+  <section class="hero">
+    <div class="left">
+      <h1 class="name">Mitansh Jadhav</h1>
+      <h2 class="role">Python Developer & AI/ML Enthusiast</h2>
+      <p class="desc">Undergraduate student passionate about building innovative solutions with Python, Artificial
+        Intelligence, and Machine Learning technologies. Every line of code is a step towards creating something
+        extraordinary.</p>
+      <div class="tags">
+        <div class="tag"><img src="https://cdn-icons-png.flaticon.com/512/5968/5968350.png" alt="Python">Python</div>
+        <div class="tag"><img src="https://cdn-icons-png.flaticon.com/512/753/753318.png" alt="AI/ML">AI/ML</div>
+        <div class="tag"><img src="https://cdn-icons-png.flaticon.com/512/3810/3810223.png" alt="Data Science">Data
+          Science</div>
+      </div>
+      <div class="buttons">
+        <a href="https://github.com/mitanshhh" target="_blank"><button class="btn orange">View My Work</button></a>
+        <a href="contact.html"><button class="btn white">Get In Touch</button></a>
+      </div>
+    </div>
+    <div class="right">
+      <img
+        src="https://media.discordapp.net/attachments/1090519749445812256/1386029767781777458/WhatsApp_Image_2025-06-21_at_22.30.32_cd782f4a.jpg?ex=6858384f&is=6856e6cf&hm=423a6204c02cd768c0821fd4023fbbdb55e985bda706ff7d922cee23d20cffac&=&format=webp&width=873&height=900"
+        alt="Mitansh Jadhav Photo">
+    </div>
+  </section>
+  <section class="cards">
+    <div class="card">
+      <h3>Education Journey</h3>
+      <p>Currently pursuing my undergraduate degree while diving deep into the world of programming and artificial
+        intelligence. Every day brings new learning opportunities.</p>
+    </div>
+    <div class="card">
+      <h3>Technical Skills</h3>
+      <p>Specializing in Python development with a growing expertise in AI and Machine Learning. Building projects that
+        combine theoretical knowledge with practical applications.</p>
+    </div>
+    <div class="card">
+      <h3>Goals & Vision</h3>
+      <p>Committed to creating innovative solutions that make a difference. Always eager to learn, experiment, and
+        contribute to the tech community.</p>
+    </div>
+  </section>
+</body>
+
+</html>
