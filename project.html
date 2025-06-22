@@ -160,6 +160,26 @@
     white-space: nowrap;
   }
     }
+
+    .page-content {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+/* Reuse your existing keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+    
   </style>
 </head>
 <body>
@@ -173,11 +193,11 @@
     </ul>
   </nav>
 
-  <section class="projects-section">
+  <section class="projects-section ">
     <h2>My Projects</h2>
     <p>Showcasing my journey in Python development, AI, and Machine Learning</p>
 
-    <div class="projects-container">
+    <div class="projects-container page-content">
       <!-- <div class="project-card">
         <img src="https://images.unsplash.com/photo-1581090700227-1e8e48cfdd03" alt="Project Image">
         <div class="project-content">
