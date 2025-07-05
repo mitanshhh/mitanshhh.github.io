@@ -10,7 +10,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * {
+       * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -72,29 +72,33 @@
         }
 
         .certifications {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-        }
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: flex-start;  
+    align-items: stretch;     
+}
+
+
 
         .card {
-            background-color: #151d2f;
-            border: 1px solid #0FA4AF;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            flex: 1 1 300px;
-            min-width: 280px;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    background-color: #151d2f;
+    border: 1px solid #0FA4AF;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    flex: 0 1 calc(33.333% - 2rem);  
+    max-width: calc(33.333% - 2rem);
+    min-height: 320px;   
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 0.75rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-        .card {
-            display: flex;
-            flex-direction: column;
-            /* ensure the card has a defined height, e.g. via parent or explicit height */
-        }
+
+
+
 
         .card a {
             margin-top: auto;
@@ -167,29 +171,38 @@
         .stats div {
             text-align: center;
         }
+@media (max-width: 768px) {
+    .certifications {
+        flex-direction: column;       
+        align-items: center;          
+    }
+
+    .card {
+        flex: 1 1 100%;               
+        max-width: 90%;               
+        min-height: auto;             
+    }
+}
 
         @media (max-width: 768px) {
             .certifications {
                 flex-direction: column;
                 align-items: center;
             }
-             nav ul {
+        }
+        @media (max-width: 768px) {
+  nav ul {
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 22px;
-          }
+    gap: 1rem;
+  }
 
   nav ul li {
     white-space: nowrap;
   }
-        }
-.page-content{
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.8s ease-out forwards;
 }
 
-/* Reuse your existing keyframes */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -199,6 +212,17 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.page-content {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.page-content.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 
@@ -231,7 +255,7 @@
                     <span class="tag">ML Applications</span>
 
                 </div>
-                <a href="https://mitanshhh.github.io/Certifications/python_ml_ibm.pdf"
+                <a href="https://mitanshhh.github.io/Certifications/py_ml_ibm.pdf"
                     class="view-credential" target="_blank">View Certificate</a>
             </div>
 
