@@ -7,169 +7,179 @@
   <link rel="icon" href="Media/logo.png" type="image/png">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Montserrat', sans-serif;
-    }
+   * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
 
-    body {
-      background-color: #0c0f1f;
-      color: white;
-      overflow-x: hidden;
-    }
+body {
+  background-color: #0c0f1f;
+  color: white;
+  overflow-x: hidden;
+}
 
-    nav {
-      display: flex;
-      /* justify-content: center;
-      align-items: center; */
-      background-color: rgba(0, 0, 0, 0.3);
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 999;
-      backdrop-filter: blur(10px);
-      flex-wrap: wrap;
-    }
+/* ---------- NAVIGATION ---------- */
+nav {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  backdrop-filter: blur(10px);
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-    nav ul {
-      display: flex;
-      list-style: none;
-      gap: 2rem;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      transition: color 0.3s, text-shadow 0.3s;
-    }
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s, text-shadow 0.3s;
+}
 
-    nav ul li a:hover {
-      color: #f9b233;
-      text-shadow: 0 0 10px #f9b233;
-    }
+nav ul li a:hover {
+  color: #f9b233;
+  text-shadow: 0 0 10px #f9b233;
+}
 
-    .projects-section {
-      padding: 4rem 2rem;
-      background: #0c0f1f;
-      text-align: center;
-    }
+/* ---------- SECTION HEADING ---------- */
+.projects-section {
+  padding: 4rem 2rem;
+  background: #0c0f1f;
+  text-align: center;
+}
 
-    .projects-section h2 {
-      font-size: 2.5rem;
-      color: #f9b233;
-      margin-bottom: 0.5rem;
-    }
+.projects-section h2 {
+  font-size: 2.5rem;
+  color: #f9b233;
+  margin-bottom: 0.5rem;
+}
 
-    .projects-section p {
-      color: #ccc;
-      margin-bottom: 2rem;
-      margin-top: 20px;
-    }
+.projects-section p {
+  color: #ccc;
+  margin-bottom: 2rem;
+  margin-top: 20px;
+}
 
-    .projects-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-    }
+/* ---------- PROJECT GRID ---------- */
+.projects-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  align-items: stretch;
+}
 
-    .project-card {
-      background-color: #1a1e3a;
-      border: 1px solid #0FA4AF;
-      border-radius: 10px;
-      width: 300px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.3s, box-shadow 0.3s;
-    }
+/* ---------- CARD ---------- */
+.project-card {
+  background-color: #1a1e3a;
+  border: 1px solid #0FA4AF;
+  border-radius: 10px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  min-height: 640px;
+}
 
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px #0FA4AF;
-    }
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 15px #0FA4AF;
+}
 
-    .project-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: fill;
-    }
+.project-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
 
-    .project-content {
-      padding: 1rem;
-      text-align: left;
-    }
+/* ---------- BODY + FLEX ---------- */
+.project-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  padding: 1rem;
+}
 
-    .project-tags {
-      margin: 0.5rem 0 1rem;
-    }
+.project-content {
+  flex-grow: 1;
+  text-align: left;
+}
 
-    .project-tags span {
-    background: #2c2f45;
-    padding: 0px 8px;
-    margin-right: 10px;
-    border-radius: 5px;
-    font-size: 0.8rem;
-    }
+.project-content h3 {
+  margin-bottom: 0.5rem;
+}
 
-    .project-buttons {
-      display: flex;
-      justify-content: center;
-      padding: 0 1rem 1rem;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
+.project-content p {
+  color: #ccc;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
 
-    .project-buttons button {
-      background: linear-gradient(45deg, #f9b233, #f97316);
-      border: none;
-      border-radius: 6px;
-      padding: 0.5rem 1rem;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+/* ---------- TAGS + BUTTON ---------- */
+.project-footer {
+  margin-top: auto;
+}
 
-    .project-buttons a {
-      text-decoration: none;
-    }
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
 
-    @media (max-width: 768px) {
+.project-tags span {
+  background: #2c2f45;
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
 
-      .projects-section h2 {
-        font-size: 2rem;
-      }
+/* ---------- BUTTON ---------- */
+.project-buttons {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
 
-      .project-card {
-        width: 100%;
-        max-width: 90%;
-        
-      }
-       nav ul {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    gap: 22px;
-  }
+.project-buttons button {
+  background: linear-gradient(45deg, #f9b233, #f97316);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  gap: 0.5rem;
+}
 
-  nav ul li {
-    white-space: nowrap;
-  }
-    }
+.project-buttons a {
+  text-decoration: none;
+}
 
-    .page-content {
+/* ---------- ANIMATION ---------- */
+.page-content {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeIn 0.8s ease-out forwards;
 }
 
-/* Reuse your existing keyframes */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -181,12 +191,50 @@
   }
 }
 
+/* ---------- RESPONSIVE DESIGN ---------- */
+@media (max-width: 768px) {
+  .projects-section h2 {
+    font-size: 2rem;
+  }
+
+  .project-card {
+    width: 100%;
+    max-width: 90%;
+    min-height: auto;
+  }
+
+  nav ul {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    gap: 1.5rem;
+  }
+
+  nav ul li {
+    white-space: nowrap;
+  }
+
+  .project-content p {
+    font-size: 0.85rem;
+  }
+}
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
     
   </style>
 </head>
 <body>
   <nav>
-    <!-- <div style="color: #f9b233; font-weight: bold; font-size: 1.2rem;">Mitansh</div> -->
+
      <ul>
       <li><a href="index.html">About</a></li>
       <li><a href="project.html" style="color: #f9b233;">Projects</a></li>
@@ -195,7 +243,7 @@
     </ul>
   </nav>
 
-  <section class="projects-section ">
+  <section class="projects-section fade-in">
     <h2>My Projects</h2>
     <p>Showcasing my journey in Python development, AI, and Machine Learning</p>
 
@@ -239,5 +287,27 @@ It bridges over 13 languages for seamless spoken interaction with AI.</p>
       </div>
     </div>
   </section>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const faders = document.querySelectorAll(".fade-in");
+
+    const options = {
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target); 
+        }
+      });
+    }, options);
+
+    faders.forEach(fade => {
+      observer.observe(fade);
+    });
+  });
 </body>
 </html>
