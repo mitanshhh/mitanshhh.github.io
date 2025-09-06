@@ -4,15 +4,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modern Project Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <title>Certifications</title>
+    <link rel="icon" href="Media/logo.png" type="image/png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0b0f19;
-            color: #d1d5db;
+               *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
         }
+
+        body {
+            background-color: #0c0f1f;
+            color: white;
+            overflow-x: hidden; 
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            backdrop-filter: blur(10px);
+            flex-wrap: wrap;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #f9b233;
+            text-shadow: 0 0 10px #f9b233;
+        }
+
+        .container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        h1 {
+            color: #f9b233;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
 
         .project-card {
             background-color: #1a1e26;
@@ -45,6 +99,15 @@
 
 <body class="p-4 sm:p-8 md:p-12 lg:p-16 xl:p-24 flex flex-col items-center">
 
+        <nav>
+        <ul>
+            <li><a href="index.html">About</a></li>
+            <li><a href="project.html">Projects</a></li>
+            <li><a href="certifications.html" style="color: #f9b233;">Certifications</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
     <header class="text-center mb-12 sm:mb-16">
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-600 mb-4">My Projects</h1>
         <p class="text-base md:text-lg text-gray-400 max-w-2xl mx-auto">
@@ -54,7 +117,7 @@
 
     <main class="w-full max-w-6xl">
         <div id="projects-container">
-            <!-- Project Categories will be dynamically inserted here by JavaScript -->
+          
         </div>
     </main>
 
