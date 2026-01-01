@@ -83,7 +83,7 @@
             font-weight: 500;
             position: relative;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 17px;
             transition: var(--transition);
         }
 
@@ -171,7 +171,7 @@
         .about-content p {
             color: var(--text-muted);
             margin-bottom: 2rem;
-            font-size: 25px;
+            font-size: 17px;
         }
 
         .about-img-container {
@@ -182,8 +182,8 @@
         }
 
         .about-img {
-            width: 450px;
-            height: 500px;
+            width: 400px;
+            height: 400px;
             object-fit: cover;
             border-radius: 100px;
             border: 2px solid var(--accent);
@@ -668,4 +668,5 @@
                 width: 60px;
                 height: 60px;
             }
+
         }
