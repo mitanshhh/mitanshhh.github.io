@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Portfolio</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0f0f11;
+            --card-bg: #1a1a1d;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent: #64ffda;
+            /* Teal accent */
+            --accent-hover: #4adbc4;
+            --gradient: linear-gradient(135deg, #64ffda 0%, #4facfe 100%);
+            --nav-height: 70px;
+            --transition: all 0.3s ease;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-color);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #333;
+            border-radius: 10px;
+            border: 2px solid var(--bg-color);
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: rgba(15, 15, 17, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        /* Desktop Nav Links */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            font-weight: 500;
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu (Hidden on Desktop) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        /* --- SECTIONS COMMON --- */
+        section {
+            padding: 100px 10%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        /* --- HOME / ABOUT --- */
+        #about {
+            flex-direction: row;
+            align-items: center;
+            gap: 4rem;
+            min-height: 100vh;
+        }
+
+        .about-content {
+            flex: 1;
+        }
+
+        .about-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .about-content h2 {
+            font-size: 1.5rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        .about-content p {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            font-size: 25px;
+        }
+
+        .about-img-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .about-img {
+            width: 450px;
+            height: 500px;
+            object-fit: cover;
+            border-radius: 100px;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 30px rgba(100, 255, 218, 0.2);
+            transition: var(--transition);
+            position: relative;
+            left: 20px;
+        }
+
+        .about-img:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 50px rgba(100, 255, 218, 0.4);
+        }
+
+        /* --- CARDS GRID (Desktop: 3 Columns) --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            /* 3 cards in a row */
+            gap: 2rem;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            min-height: 400px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 180px;
+            background-color: #2a2a2d;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .card-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: auto;
+        }
+
+        /* --- VIEW MORE CIRCLE (Clean) --- */
+        .view-more-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            min-height: 400px;
+            /* Match card height */
+            text-align: center;
+            /* Removed card background and border as requested */
+            background: transparent;
+            border: none;
+        }
+
+        .view-more-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 2rem;
+            transition: var(--transition);
+            background: transparent;
+            margin-bottom: 1rem;
+        }
+
+        .view-more-container:hover .view-more-circle {
+            background: var(--accent);
+            color: #000;
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(100, 255, 218, 0.4);
+        }
+
+        .view-more-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-main);
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .view-more-container:hover .view-more-label {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+
+        /* Back Button logic */
+        .back-btn-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .btn-outline {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-outline:hover {
+            background: rgba(100, 255, 218, 0.1);
+        }
+
+        .btn-fill {
+            background: var(--accent);
+            color: #000;
+            border: 1px solid var(--accent);
+        }
+
+        .btn-fill:hover {
+            background: var(--accent-hover);
+        }
+
+        /* --- CONTACT --- */
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 6rem;
+            margin-top: 2rem;
+        }
+
+        .social-icon-container {
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+            width: 100px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--card-bg);
+        }
+
+        .social-icon-container img {
+            width: 45px;
+            height: 45px;
+            object-fit: contain;
+            transition: var(--transition);
+        }
+
+        .social-icon-container:hover {
+            border-color: var(--accent);
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- RESPONSIVE --- */
+        @media screen and (max-width: 768px) {
+            section {
+                padding: 100px 5%;
+            }
+
+            #about {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 120px;
+            }
+
+            /* --- Hamburger Toggle Logic --- */
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                /* Hidden by default on mobile */
+                position: absolute;
+                top: var(--nav-height);
+                left: 0;
+                width: 100%;
+                background: var(--bg-color);
+                flex-direction: column;
+                padding: 2rem 0;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            /* Force 2 Columns on Mobile Grid */
+            .grid-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+
+            .card-title {
+                font-size: 1rem;
+            }
+
+            .card-desc {
+                font-size: 0.8rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .card-content {
+                padding: 1rem;
+            }
+
+            .btn {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.7rem;
+            }
+
+            .card {
+                min-height: auto;
+            }
+
+            .view-more-container {
+                min-height: 250px;
+            }
+
+            .contact-links {
+                gap: 4rem;
+            }
+
+            .social-icon-container img {
+                width: 27px;
+                height: 28px;
+            }
+
+            .social-icon-container {
+                width: 60px;
+                height: 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">Pym1t</div>
+
+        <!-- Hamburger Icon -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+            <a onclick="window.scrollTo({top: 0, behavior: 'smooth'}); toggleMenu()">Home</a>
+            <a onclick="scrollToSection('projects'); toggleMenu()">Projects</a>
+            <a onclick="scrollToSection('certifications'); toggleMenu()">Certifications</a>
+            <a href="timeline.html">Timeline</a>
+            <a onclick="scrollToSection('contact'); toggleMenu()">Contact</a>
+        </div>
+    </nav>
+
+    <!-- MAIN VIEW -->
+    <div id="home-view">
+
+        <!-- ABOUT SECTION -->
+        <section id="about">
+            <div class="about-content">
+                <p>Hello, I'm</p>
+                <h1>Mitansh Jadhav</h1>
+                <h2>Python Developer & AI/ML Enthusiast</h2>
+                <p>Undergraduate student passionate about building innovative solutions with Python, Artificial
+                    Intelligence, and Machine Learning technologies. Every line of code is a step towards creating
+                    something extraordinary.</p>
+                <div style="display: flex; gap: 1rem; justify-content: left; flex-wrap: wrap;">
+                    <a onclick="scrollToSection('projects')" class="btn btn-fill">View Work</a>
+                    <a onclick="scrollToSection('contact')" class="btn btn-outline">Contact Me</a>
+                </div>
+            </div>
+            <div class="about-img-container">
+                <img src="Media/landing_page_img.jpg" alt="Profile" class="about-img">
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects">
+            <div class="section-title">Featured <span>Projects</span></div>
+
+            <div class="grid-container" id="projects-grid">
+                <!-- Projects injected via JS -->
+            </div>
+
+            <!-- Back Button (Bottom) -->
+            <div class="back-btn-container" id="projects-back-btn">
+                <button class="btn btn-outline" onclick="renderProjects(false)">← Back to Top 5</button>
+            </div>
+        </section>
+
+        <!-- CERTIFICATIONS SECTION -->
+        <section id="certifications">
+            <div class="section-title">My <span>Certifications</span></div>
+
+            <div class="grid-container" id="certs-grid">
+                <!-- Certs injected via JS -->
+            </div>
+
+            <!-- Back Button (Bottom) -->
+            <div class="back-btn-container" id="certs-back-btn">
+                <button class="btn btn-outline" onclick="renderCerts(false)">← Back to Top 5</button>
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact" style="min-height: 50vh;">
+            <div class="section-title">Get In <span>Touch</span></div>
+            <p style="text-align: center; max-width: 600px; margin: 0 auto; color: var(--text-muted);">
+                Let's connect and discuss opportunities, collaborations, or just have a chat about technology!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:pym1tz@gmail.com" class="social-icon-container" title="Email">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"
+                        alt="Gmail">
+                </a>
+                <a href="https://www.linkedin.com/in/mitanshjadhav/" target="_blank" class="social-icon-container"
+                    title="LinkedIn">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png"
+                        alt="LinkedIn">
+                </a>
+                <a href="https://twitter.com/mitanshhh__" target="_blank" class="social-icon-container"
+                    title="Twitter / X">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/X_icon_2.svg" alt="X">
+                </a>
+                <a href="https://instagram.com/mitanshhh.__" target="_blank" class="social-icon-container"
+                    title="Instagram">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg"
+                        alt="Instagram">
+                </a>
+            </div>
+            <footer style="text-align: center; margin-top: 5rem; color: #555; font-size: 0.8rem;">
+                &copy; 2025 Mitansh Jadhav Built with HTML, CSS, JS.
+            </footer>
+        </section>
+    </div>
+
+    <script>
+        /* =========================================
+           DATA CONFIGURATION
+           ========================================= */
+
+        const projectsData = [{
+                title: "AI Tutor",
+                desc: "An AI-powered tutor that transforms uploaded study material into an interactive learning experience using RAG, Gemini models, quizzes, summaries, and personalized learning paths.",
+                image: "Media/ai_tutor.png",
+                codeLink: "https://github.com/mitanshhh/NOVA-AI",
+                demoLink: "https://pym1t-nova-ai.streamlit.app/"
+            },
+            {
+                title: "Soil Analysis",
+                desc: "Predict soil fertility using Random Forest Algorithm based on N, P, K, and pH values. AI-powered suggestions for improving soil nutrients (Nitrogen, Potassium, Phosphorus and pH). Integration with MLflow for experiment tracking and logging metrics.",
+                image: "Media/soil_analysis.png",
+                codeLink: "https://github.com/mitanshhh/Soil-Analysis",
+                demoLink: "https://huggingface.co/spaces/pyM1t/Soil-Analysis"
+            },
+            {
+                title: "Student Placement Predictor",
+                desc: "The Student Placement Predictor is a machine learning web app that predicts whether a student is likely to get placed based on their academic and skill-related inputs. It helps students and educators identify placement potential using easily measurable attributes.",
+                image: "Media/student-placement-predictor.png",
+                codeLink: "https://github.com/mitanshhh/student-placement-predictor",
+                demoLink: "https://huggingface.co/spaces/pymit/student-placement-predictor"
+            },
+            {
+                title: "PredictPlot",
+                desc: "PredictPlot is a simple and effective tool for visualizing the results of linear regression models. It enables users to train a linear model, compute prediction accuracy, and clearly compare actual data with predicted values through plots.",
+                image: "Media/predict_plot.png",
+                codeLink: "https://github.com/mitanshhh/PredictPlot",
+            },
+            {
+                title: "SpeakSmart",
+                desc: "SpeakSmart is a multilingual AI voice assistant that listens, translates, and responds in natural speech using cutting-edge language models and neural TTS. It bridges over 13 languages for seamless spoken interaction with AI.",
+                image: "Media/speak_smart.png",
+                codeLink: "https://github.com/mitanshhh/SpeakSmart",
+
+            }
+        ];
+
+        const certificationsData = [{
+                title: "OpenCV Bootcamp",
+                desc: "Successfully completed the OpenCV Bootcamp by OpenCV University with a grade of 94%. Gained practical knowledge of computer vision techniques, including object detection, tracking, and real-world OpenCV applications, strengthening expertise in machine learning and AI-driven vision tasks.",
+                demoLink: "https://mitanshhh.github.io/Certifications/OpenCV_bootcamp_certificate.pdf"
+            },
+            {
+                title: "Introduction to Python - OpenCV",
+                desc: "Successfully completed the Introduction to Python OpenCV course by Simplilearn. Gained hands-on experience in computer vision fundamentals, including image processing, motion detection, and facial/object recognition using OpenCV with Python.",
+                demoLink: "https://mitanshhh.github.io/Certifications/OpenCV_simplilearn.pdf"
+            },
+            {
+                title: "Applied Machine Learning",
+                desc: "This course on Applied Machine Learning serves as a comprehensive guide for individuals aspiring to obtain proficiency in Machine Learning.The course progresses from core concepts to practical applications and will equip you with a thorough understanding of essential machine learning algorithms.",
+                demoLink: "https://mitanshhh.github.io/Certifications/ML_APPLICATION.pdf"
+            },
+            {
+                title: "4.0 Robotics Systems",
+                desc: "This course provides a comprehensive overview of the field of robotics, encompassing both theoretical concepts and practical applications. It covers the fundamentals of robot anatomy, programming, and design methodologies, as well as the emerging technologies driving the industry, such as AI, IoT, and collaborative robots.",
+                demoLink: "https://mitanshhh.github.io/Certifications/ML_ROBOTICS.pdf"
+            },
+            {
+                title: "AgenticAI + MLOps",
+                desc: "Machine Learning, LLMs & Agentic AI - A Beginner's Conceptual Guide.It helped me to learn what machine learning is, how it's different from traditional programming, and the types of learning like supervised, unsupervised, and reinforcement learning. Information on how models are built, evaluated, and improved, and get familiar with common algorithms like regression, decision trees, neural networks and more.",
+                demoLink: "https://mitanshhh.github.io/Certifications/UC_agentic_ai.jpg"
+            },
+            {
+                title: "GenAI Powered Data Analytics",
+                desc: "Designed an AI-driven collections strategy leveraging agentic AI and automation, incorporating ethical AI principles, regulatory compliance, and scalable implementation frameworks.",
+                demoLink: "https://mitanshhh.github.io/Certifications/tata_gen_ai.pdf"
+            },
+            {
+                title: "Machine Learning with Python",
+                desc: "This Machine Learning with Python course dives into the basics of machine learning using an approachable and well-known programming language. You'll learn about Supervised vs. Unsupervised Learning, look into how Statistical Modeling relates to Machine Learning, and do a comparison of each.",
+                demoLink: "https://mitanshhh.github.io/Certifications/py_ml_ibm.pdf"
+            },
+            {
+                title: "Python for Data Science",
+                desc: "Successfully completed an introductory course in Python programming with a focus on data science applications. Covered essential topics including data types, structures, functions, and libraries such as NumPy and Pandas. Gained hands-on experience in writing Python code, manipulating data, and performing basic data analysis. Issued by IBM SkillsBuild and Cognitive Class.",
+                demoLink: "https://mitanshhh.github.io/Certifications/python_ds_ibm.pdf"
+            },
+            {
+                title: "Introduction to Python",
+                desc: "This course describes the basic concepts of Python like Control structures, Functions, Collections, Libraries and built-in functions, Modules and Packages, File and Exception handling in Python",
+                demoLink: "https://mitanshhh.github.io/Certifications/introduction_to_python.pdf"
+            },
+            {
+                title: "Python Fundamentals",
+                desc: "Python Fundamentals is a beginner-friendly introduction to the Python programming language. It covers essential concepts such as syntax, data types, control flow, functions, and file handling. The course also delves into object-oriented programming (OOP) principles, including classes, objects, inheritance, and encapsulation.",
+                demoLink: "https://mitanshhh.github.io/Certifications/python_fundamentals.pdf"
+            }
+        ]
+
+
+        /* =========================================
+           RENDER GRID LOGIC
+           ========================================= */
+
+        // Projects Card: Code + Link buttons
+        function createProjectCardHTML(item) {
+            const codeBtn = item.codeLink ?
+                `<a href="${item.codeLink}" target="_blank" class="btn btn-outline">Code</a>` :
+                "";
+
+            const demoBtn = item.demoLink ?
+                `<a href="${item.demoLink}" target="_blank" class="btn btn-fill">Link</a>` :
+                "";
+
+            return `
+        <div class="card">
+            <img src="${item.image}" alt="${item.title}" class="card-img">
+            <div class="card-content">
+                <h3 class="card-title">${item.title}</h3>
+                <p class="card-desc">${item.desc}</p>
+                <div class="card-links">
+                    ${codeBtn}
+                    ${demoBtn}
+                </div>
+            </div>
+        </div>
+    `;
+        }
+
+
+        // Certs Card: Single View button - NO IMAGE
+        function createCertCardHTML(item) {
+            return `
+                <div class="card" style="min-height: 250px;"> <!-- Reduced min-height for text-only card -->
+                    <div class="card-content">
+                        <h3 class="card-title" style="margin-top: 0;">${item.title}</h3>
+                        <p class="card-desc">${item.desc}</p>
+                        <div class="card-links">
+                            <a href="${item.demoLink}" target="_blank" class="btn btn-fill" style="width: 100%;">View Certification</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Updated "View All" Button HTML (Circle Design)
+        function createViewMoreButton(onClickFn) {
+            return `
+                <div class="view-more-container" onclick="${onClickFn}" style="min-height: 250px;">
+                    <div class="view-more-circle">➜</div>
+                    <span class="view-more-label">View All</span>
+                </div>
+            `;
+        }
+
+        // --- PROJECTS RENDERING ---
+        function renderProjects(isExpanded) {
+            const grid = document.getElementById('projects-grid');
+            const backBtn = document.getElementById('projects-back-btn');
+            grid.innerHTML = '';
+
+            if (isExpanded) {
+                // Show ALL projects
+                projectsData.forEach(proj => {
+                    grid.innerHTML += createProjectCardHTML(proj);
+                });
+                backBtn.style.display = 'flex'; // Show Back button
+            } else {
+                // Show 5 items + View More button (layout request)
+                const displayCount = 5;
+                const itemsToShow = projectsData.slice(0, displayCount);
+
+                itemsToShow.forEach(proj => {
+                    grid.innerHTML += createProjectCardHTML(proj);
+                });
+
+                if (projectsData.length > displayCount) {
+                    grid.innerHTML += createViewMoreButton('renderProjects(true)');
+                }
+                backBtn.style.display = 'none'; // Hide Back button
+            }
+        }
+
+        // --- CERTS RENDERING ---
+        function renderCerts(isExpanded) {
+            const grid = document.getElementById('certs-grid');
+            const backBtn = document.getElementById('certs-back-btn');
+            grid.innerHTML = '';
+
+            if (isExpanded) {
+                certificationsData.forEach(cert => {
+                    grid.innerHTML += createCertCardHTML(cert);
+                });
+                backBtn.style.display = 'flex';
+            } else {
+                const displayCount = 5;
+                const itemsToShow = certificationsData.slice(0, displayCount);
+
+                itemsToShow.forEach(cert => {
+                    grid.innerHTML += createCertCardHTML(cert);
+                });
+
+                if (certificationsData.length > displayCount) {
+                    grid.innerHTML += createViewMoreButton('renderCerts(true)');
+                }
+                backBtn.style.display = 'none';
+            }
+        }
+
+        // Initial Render
+        renderProjects(false);
+        renderCerts(false);
+
+
+        /* =========================================
+           MOBILE NAV TOGGLE
+           ========================================= */
+
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        function scrollToSection(id) {
+            // Simplified scrollToSection: just scroll, no view switching needed
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
+        }
+    </script>
+</body>
+
+</html>

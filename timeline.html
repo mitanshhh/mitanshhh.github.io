@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Journey - Timeline</title>
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --bg-color: #0f0f11;
+            --card-bg: #1a1a1d;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --accent: #64ffda;
+            --accent-hover: #4adbc4;
+            --gradient: linear-gradient(135deg, #64ffda 0%, #4facfe 100%);
+            --nav-height: 70px;
+            --transition: all 0.3s ease;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            list-style: none;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) var(--bg-color);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #333;
+            border-radius: 10px;
+            border: 2px solid var(--bg-color);
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: rgba(15, 15, 17, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            cursor: pointer;
+        }
+
+        /* Desktop Nav Links */
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            font-weight: 500;
+            position: relative;
+            cursor: pointer;
+            font-size: 20px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--accent);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Hamburger Menu (Hidden on Desktop) */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--text-main);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        /* --- SECTIONS COMMON --- */
+        section {
+            padding: 100px 10%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title span {
+            color: var(--accent);
+        }
+
+        /* --- TIMELINE PAGE SPECIFIC --- */
+        #timeline-view {
+            display: block;
+            /* Visible by default in this file */
+            padding: 100px 5% 50px 5%;
+            min-height: 100vh;
+            background: var(--bg-color);
+        }
+
+        .timeline-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding-bottom: 20px;
+        }
+
+        /* The central line */
+        .timeline-container::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #333;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            background-color: inherit;
+            width: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item:hover .timeline-content {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.1);
+        }
+
+        .left {
+            left: 0;
+        }
+
+        .right {
+            left: 50%;
+        }
+
+        /* The dots on the timeline items */
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            right: -8px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent);
+            top: 20px;
+            border-radius: 50%;
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .timeline-item:hover::after {
+            background-color: var(--accent);
+        }
+
+        .right::after {
+            left: -8px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--card-bg);
+            position: relative;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .timeline-date {
+            color: var(--accent);
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        /* --- TIMELINE END DOT (Start of Career) --- */
+        .timeline-end-dot {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background-color: var(--bg-color);
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            z-index: 2;
+        }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .modal-content {
+            background: var(--card-bg);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--accent);
+            overflow-y: auto;
+            transform: scale(0.8);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: #fff;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10;
+        }
+
+        .image-gallery {
+            display: flex;
+            overflow-x: auto;
+            gap: 15px;
+            padding-bottom: 10px;
+            margin-bottom: 1.5rem;
+            scroll-behavior: smooth;
+        }
+
+        .image-gallery img {
+            height: 250px;
+            width: auto;
+            border-radius: 8px;
+            flex-shrink: 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-body p {
+            white-space: pre-line;
+        }
+
+
+        /* --- RESPONSIVE --- */
+        @media screen and (max-width: 768px) {
+
+            /* --- Hamburger Toggle Logic --- */
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                display: none;
+                /* Hidden by default on mobile */
+                position: absolute;
+                top: var(--nav-height);
+                left: 0;
+                width: 100%;
+                background: var(--bg-color);
+                flex-direction: column;
+                padding: 2rem 0;
+                text-align: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .timeline-container::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item::after {
+                left: 23px;
+            }
+
+            .right {
+                left: 0%;
+            }
+
+            .right::after {
+                left: 23px;
+            }
+
+            .timeline-end-dot {
+                left: 31px;
+            }
+
+            .image-gallery img {
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo" onclick="window.location.href='index.html'">Pym1t</div>
+
+        <!-- Hamburger Icon -->
+        <div class="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+            <a href="index.html">Home</a>
+            <a href="index.html#projects">Projects</a>
+            <a href="index.html#certifications">Certifications</a>
+            <a href="#" class="active">Timeline</a>
+            <a href="index.html">Contact</a>
+        </div>
+    </nav>
+
+    <!-- TIMELINE VIEW -->
+    <div id="timeline-view">
+        <div class="section-title" style="margin-top: 2rem;">My <span>Journey</span></div>
+        <p style="text-align: center; color: var(--text-muted); margin-bottom: 3rem;">
+            A timeline of events, hackathons, and milestones.
+        </p>
+
+        <div class="timeline-container" id="timeline-container">
+            <!-- Timeline items injected via JS -->
+            <!-- End dot injected via JS/HTML below -->
+            <div class="timeline-end-dot"></div>
+        </div>
+    </div>
+
+    <!-- MODAL FOR TIMELINE DETAILS -->
+    <div class="modal-overlay" id="timeline-modal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeModal()">&times;</button>
+            <div class="modal-body" id="modal-body">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+
+        /* TIMELINE DATA */
+        const timelineData = [
+                        {
+                date: "Dec 20, 2025",
+                title: "Devfest - Mumbai",
+                organizer: "Google Developer Group",
+                details: `Key Highlights:
+
+ ADK Workshop: From building Healthcare agnet from scratch to full model deploymen, it was intense and rewarding. Got to clear my few doubts regarding different approaches a RAG model can act based on different inputs, also understood how important is it to save the logs and as it can help to understand where the bug is hiding at.
+
+ Predictive DevOps: I attended a session on Intelligent CI/CD Pipelines. Seeing how AI/ML can be used for Predictive Failure Detection was a game-changer. Imagine a pipeline that flags a potential break before the build even finishes. DevOps wont be replaced by AI rather we can say AI + DevOps would be the next future game changer.
+
+ SLMs & The Future: I attended a deep dive into Small Language Models where one line stuck with me: "LLMs are not the future but personalized models are." The shift toward on-device, highly contextual AI is definitely where the magic is happening.
+
+ Networking & Games: Tech is better with community! I ended up playing a nearly hour-long game of UNO at the Aayu app booth. It was a fun way to learn about how they’re using AI to help users manage prescriptions and health queries digitally. 
+`,
+                images: [
+                    'https://media.licdn.com/dms/image/v2/D4E22AQHsp0_cCHMgpQ/feedshare-shrink_2048_1536/B4EZtCOQCyHcAw-/0/1766342596461?e=1769040000&v=beta&t=L4habtf1zyQ3RJEpTV2KaatvX-foGkiCadPEwnlehh8','https://media.licdn.com/dms/image/v2/D4E22AQFJauGklOkWCQ/feedshare-shrink_2048_1536/B4EZtCOQCWIMAw-/0/1766342596614?e=1769040000&v=beta&t=NEkCYcCd2wik8QwJs5hjK-G2Y62Au-rrfCPW8jMbj00','https://media.licdn.com/dms/image/v2/D4E22AQEWJ8qvZCW_qw/feedshare-shrink_2048_1536/B4EZtCOQCnIwAw-/0/1766342592617?e=1769040000&v=beta&t=k4efdOifHotpU01cpz46fJ0SLHz5jeRZbLG9P5RgILA'                ]
+            },
+
+
+
+            {
+                date: "Dec 6, 2025",
+                title: "Sprint to Imagine Cup: Introduction and Microsoft Foundry Agent Service",
+                organizer: "Microsoft",
+                details: `This session was a deep dive into the next generation of AI: decision-making agents that go beyond just generating text. We explored the core mental model goals, memory, planning, and action loops that powers these advanced systems.
+
+One of the most eye-opening concepts from the Microsoft Foundry Agent Service workshop was seeing the AI Agent's decision-making loop in action! It's not just about generating text; it's about chaining together complex operations to fulfill a user's goal
+
+The main focus of the workshop was a code-first build approach, where we learned to:
+
+Implement agent actions and wire up various tools.
+
+Connect data sources for grounded responses.
+
+Test end-to-end flows for real-world scenarios.
+`,
+                images: [
+                    'https://media.licdn.com/dms/image/v2/D4D22AQGl2wp7Se-76Q/feedshare-shrink_2048_1536/B4DZr_.jF0KEAo-/0/1765231178467?e=1769040000&v=beta&t=Bq-EjpykGa2n5Cmt5gXRwsnvDI6iXS2Y_o6N4f4JJN4','https://media.licdn.com/dms/image/v2/D4D22AQFstCxUJxBLvA/feedshare-shrink_2048_1536/B4DZr_.jFKKEAk-/0/1765231178430?e=1769040000&v=beta&t=lNoO885QgHA-QIKEpCFxoeNz2eNubL5DRCVlMkakI0A','https://media.licdn.com/dms/image/v2/D4D22AQHiOjRwXNJN2w/feedshare-shrink_1280/B4DZr_.kuuIAAc-/0/1765231185353?e=1769040000&v=beta&t=SJ9pB0Se3Xz0VripcgWymCZdT334MMUDkxAV3clK6QE'                ]
+            },
+
+
+                        {
+                date: "Nov 29, 2025",
+                title: "Smart QA with n8n + Google Sheets",
+                organizer: "The Test Tribe",
+                details: `We explored how n8n, a powerful, open-source workflow automation tool, combined with Google Sheets, can completely transform QA efficiency.
+
+ What I Learned to Automate:
+The workflow starts from Trigger Node, these nodes are responsible for initiating a workflow.
+Moving forward to google sheets to collect the data then performing Data Analysis on it through Code node, it allows user to execute custom Python or Js code. At last appending the changes into google sheets or anywhere we want to store.
+
+Core Benefits:
+Free Database: Google Sheets serves as a universal, free database for tracking.
+
+Live Monitoring: Simple, real-time tracking of test results.
+
+Customizable: n8n can handle use cases like RAG Analysis and Building AI Agents beyond just basic reporting!
+`,
+                images: [
+                    'https://media.licdn.com/dms/image/v2/D4D22AQGONo_ZRSsRCA/feedshare-shrink_1280/B4DZrRNwoEH0As-/0/1764446639542?e=1769040000&v=beta&t=VOlfyeNPQOcjHwUquguk7WJntLUzq9zWiwDglO8qDWE','https://media.licdn.com/dms/image/v2/D4D22AQET6aLGEYImFw/feedshare-shrink_2048_1536/B4DZrRNwuvJIAw-/0/1764446644595?e=1769040000&v=beta&t=1Fs-XLiojd_iyL9_LvUUJ6zn5l8BTMAN_P48x_tdAf8','https://media.licdn.com/dms/image/v2/D4D22AQGqAQzJgzY5Uw/feedshare-shrink_1280/B4DZrRNwoZH4As-/0/1764446637644?e=1769040000&v=beta&t=9UPGashComYf2fp8_nmMCywtZlDhM-wd8WHop2B_xxY'
+                ]
+            },
+
+
+
+
+            {
+                date: "Nov 22, 2025",
+                title: "Haxnation Meetups Mumbai",
+                organizer: "Haxnation",
+                details: `GRC as a Strategic Driver:
+Governance, Risk, and Compliance (GRC) isn't just about rules; it's a strategic driver for Resilience, Reputation, and Growth. The GRC Core Concept links Governance (monitoring), Risk (identification before harm), and Compliance (adherence to rules).
+
+The CIA Triad:
+The core security principle is the CIA Triad:
+Confidentiality (Data should be secure)
+Integrity (Data available to authorized users)
+Availability (System and data accessibility)
+
+Data Privacy Principles:
+Key to protecting user trust is recognizing that the user has rights over their data and consent is required. A GRC Professional is truly the Custodian of Trust, responsible for protecting user data and Intellectual Property (IP).
+
+Managing Third-Party Risk (TPRM):
+A major concern today is the risk of data leaks and reputation loss due to breaches involving vendors (external parties who hold our data).
+
+The TPRM team is focusing on Automation and a Centralized Dashboard to manage this risk.
+
+So much valuable information on protecting data and building a robust security posture! Excited to apply these frameworks in practice.`,
+                images: [
+                    'https://media.licdn.com/dms/image/v2/D4D22AQHBtGZn9uO8zA/feedshare-shrink_2048_1536/B4DZqx2TqdIgAw-/0/1763920396953?e=1769040000&v=beta&t=4qUQB6mn2EV5CL9Bko_eNLfR_pDMq7RLSx--lhFkSZg', 'https://media.licdn.com/dms/image/v2/D4D22AQEOuAlLPCmB3w/feedshare-shrink_2048_1536/B4DZqx2TqVGsAw-/0/1763920399146?e=1769040000&v=beta&t=ehETIs9-J_ONzOTgLpuA78Lt6TZklkn0MEUtutvU19U'],
+
+            },
+
+
+
+            {
+                date: "Nov 15, 2025",
+                title: "Kong x Git Together x Grafana",
+                organizer: "Github user group",
+                details: `GitHub & Development: Exploring efficient API usage and leveraging the power of GitHub Copilot to accelerate development workflows.
+
+Kong & API Gateway: Understanding the critical role of Kong in API testing, debugging, and, most importantly, how it manages robust user authorization.
+
+Grafana & Observability: Getting hands-on with advanced tracing tools. Specifically, diving into:
+
+Grafana Tempo for high-volume, cost-efficient distributed tracing.
+
+The principles of effective tracing and ensuring smooth context propagation across services.!
+
+This collaborative meetup truly highlighted the synergy between API management and robust observability stacks.`,
+                images: [
+                    'https://media.licdn.com/dms/image/v2/D4D22AQGZUQUNwKY85w/feedshare-shrink_2048_1536/B4DZqS8YeIIkAw-/0/1763401895899?e=1769040000&v=beta&t=kcm1FwwkGPnpHLhXSChNwWuwQ9QKWXwLgWJBOgh1deQ', 'https://media.licdn.com/dms/image/v2/D4D22AQFsvFKHeDGGjg/feedshare-shrink_2048_1536/B4DZqS8Yd4GkAw-/0/1763401900250?e=1769040000&v=beta&t=9ik5g4sy8tCqMkAqzoAZSSqatoqNxWZeUA08H5AI7Ig'
+                ]
+            },
+
+
+
+
+            {
+                date: "Nov 10, 2025",
+                title: "Code to Cloud",
+                organizer: "Evonence + Cloudnyx.ai",
+                details: `Think of Gemini as a universal platform for advanced enterprise AI. It allows for agent-based development demonstrating how we can deploy powerful AI agents within the platform and even integrate other external agents to create complex collaborative AI systems.
+
+We dont want AI just to give plain answers and reply to our conversation rather we would like our work to be automated with AI, this is where AI Agents come into play. We explored connectors which act as bridges for Gemini to access external, real-time, or proprietary data sources. Key features highlighted were multimodal, grounding, the ability to process and reason across different data types like text, images, and video, the power of uploading files for specific, contextual analysis, and using Actions to enable the model to perform tasks. We also touched upon ADK (Agent Development Kit) customization for building tailored agents. 
+
+The magic is in how Gemini handles data. I cleared my doubt on how Gemini stores and retrieves information, not through traditional databases, but by converting data into vector embeddings which efficiently capture the semantic meaning allowing for highly accurate and contextual retrieval which is the foundation of semantic search. This way we can save our time and token cost along with wider area of information through semantic search. 
+`,
+                images: [
+                    "https://media.licdn.com/dms/image/v2/D4D22AQGUv4vQldUVnw/feedshare-shrink_2048_1536/B4DZpt7gfqKIAw-/0/1762780909232?e=1769040000&v=beta&t=2J-tVfBacbDTyiqzJZDxBnWLsPIjaZk4LD9-8BdVH2s",
+                    "https://media.licdn.com/dms/image/v2/D4D22AQEiK7wsqIzMHg/feedshare-shrink_2048_1536/B4DZpt7gf5KUA8-/0/1762780910605?e=1769040000&v=beta&t=Ef0IF_9F92iBmHqVkfhk2hYpkq_F36CK7NxEUquzfEk", 'https://media.licdn.com/dms/image/v2/D4D22AQEgwnlA-jET4A/feedshare-shrink_2048_1536/B4DZpt7gfnHsAw-/0/1762780908924?e=1769040000&v=beta&t=NYHEQ78jRf-Pof1PzLOLvChmxa8gqtMIaLCXzWh8W_k'
+                ]
+            },
+            {
+                date: "Oct 04, 2025",
+                title: "Season of AI - MCP Dev Day",
+                organizer: "Azure India",
+                details: `I spent the day learning all about Microsoft's Model Context Protocol (MCP), and it really hit home why this is a MUST for building modern AI applications. 
+
+Think of MCP as the universal translator and secure routing layer for your AI. It allows your applications (like Copilot Studio, VS Code, or Microsoft Teams) to connect seamlessly to multiple services at once whether they are internal APIs, Azure Functions, or external data sources.
+
+The magic is in the Client-Server architecture. Instead of writing custom connectors for everything, MCP standardizes how the Large Language Model (LLM) discovers and uses external Tools and Resources. This dramatically speeds up development and makes AI agents far more powerful and context-aware.`,
+                images: ['https://media.licdn.com/dms/image/v2/D4D22AQFYqQcXKOG0DQ/feedshare-shrink_2048_1536/B4DZmvX3S0JcAw-/0/1759583906351?e=1769040000&v=beta&t=hR9ITU8BP3UCrJ1ODMJjFhGyciUkGVHzyWqbbt8sohM', 'https://media.licdn.com/dms/image/v2/D4D22AQG51Hrcl2BkWw/feedshare-shrink_2048_1536/B4DZmvX3N1JEAw-/0/1759583894620?e=1769040000&v=beta&t=Gsg7mwPVGCvLaP8snCTF5Vo4F1LwlulGZdV4L5otN08']
+            },
+            {
+                date: "Sep 25, 2025",
+                title: "AI & Cloud Study Jams 2025",
+                organizer: "Google Developer Group",
+                details: "The session on building applications with Gemini and Google Cloud were excellent and I really enjoyed the practical demo on container deployment.The interactive session was very informative and provided many valuable professional insights. Its great to have a deeper understanding of these tools and how they work together.",
+                images: [
+                    'https://media.licdn.com/dms/image/v2/D4D22AQHNySOH9pAyOQ/feedshare-shrink_2048_1536/B4DZmCWJKWJMAw-/0/1758828468992?e=1769040000&v=beta&t=Jv-oP7GBwgoScx9PMSDety9hhVL9PPKGz1xPNRKUjQE', 'https://media.licdn.com/dms/image/v2/D4D22AQG7CvAURLEMDQ/feedshare-shrink_2048_1536/B4DZmCWJJqJcA0-/0/1758828469023?e=1769040000&v=beta&t=huQN627WKVUo9eMj6y0I5GDtsprjJxDYeNEZozucCCI'
+                ]
+            }
+        ];
+
+        /* =========================================
+           RENDER TIMELINE LOGIC
+           ========================================= */
+        const timelineContainer = document.getElementById('timeline-container');
+
+        let timelineHTML = '';
+        timelineData.forEach((item, index) => {
+            const sideClass = index % 2 === 0 ? 'left' : 'right';
+            timelineHTML += `
+                <div class="timeline-item ${sideClass}" onclick="openModal(${index})">
+                    <div class="timeline-content">
+                        <span class="timeline-date">${item.date}</span>
+                        <h3 style="margin-bottom: 5px;">${item.title}</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">${item.organizer}</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Insert items BEFORE the dot (which is static in HTML)
+        timelineContainer.insertAdjacentHTML('afterbegin', timelineHTML);
+
+
+        /* =========================================
+           MODAL LOGIC
+           ========================================= */
+        const modalOverlay = document.getElementById('timeline-modal');
+        const modalBody = document.getElementById('modal-body');
+
+        function openModal(index) {
+            const data = timelineData[index];
+
+            // Generate Image Gallery HTML
+            let galleryHTML = '';
+            if (data.images && data.images.length > 0) {
+                galleryHTML = '<div class="image-gallery">';
+                data.images.forEach(imgSrc => {
+                    galleryHTML += `<img src="${imgSrc}" alt="Event Image">`;
+                });
+                galleryHTML += '</div>';
+            }
+
+            modalBody.innerHTML = `
+                ${galleryHTML}
+                <span style="color: var(--accent); font-weight: bold; font-size: 1.1rem;">${data.date}</span>
+                <h2 style="margin: 10px 0; font-size: 2rem;">${data.title}</h2>
+                <p style="color: #ddd; line-height: 1.8;">${data.details}</p>
+            `;
+
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        modalOverlay.addEventListener('click', (e) => {
+            if (e.target === modalOverlay) closeModal();
+        });
+
+        /* =========================================
+           MOBILE NAV TOGGLE
+           ========================================= */
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+
+</html>
