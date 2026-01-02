@@ -188,15 +188,6 @@
             cursor: pointer;
             margin-bottom: 2rem;
             z-index: 1; /* Added: Ensures items (and dots) sit on top of the line */
-            /* Animation Logic */
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .timeline-item.visible {
-            opacity: 1;
-            transform: translateY(0);
         }
 
         .timeline-item:hover .timeline-content {
@@ -235,12 +226,27 @@
             left: -8px;
         }
 
+        /* Animation Keyframes */
+        @keyframes fadeInSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .timeline-content {
             padding: 20px;
             background-color: var(--card-bg);
             position: relative;
             border-radius: 6px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            
+            /* Animation Logic: Runs once on load, affects only content box */
+            animation: fadeInSlideUp 0.8s ease-out forwards;
         }
 
         .timeline-date {
@@ -627,22 +633,6 @@ The magic is in the Client-Server architecture. Instead of writing custom connec
 
         // Insert items BEFORE the dot (which is static in HTML)
         timelineContainer.insertAdjacentHTML('afterbegin', timelineHTML);
-
-        // Add Animation Observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target); // Only animate once per item
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        document.querySelectorAll('.timeline-item').forEach(item => {
-            observer.observe(item);
-        });
 
 
         /* =========================================
